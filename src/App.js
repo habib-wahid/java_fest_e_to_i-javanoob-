@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {Routes,Route} from "react-router-dom";
+import Home from "./components/Home";
+import LogIn from "./components/LogIn";
+import Dashboard from "./components/Dashboard";
+import Menu from "./components/Menu";
+import AuthUser from "./components/AuthUser";
+import Guest from "./nav/Guest";
 
 function App() {
+    const {getToken} = AuthUser();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        {
+            !getToken()?
+            <Guest /> :
+            <Menu />
+        }
+
+
+        <div>
+            <Routes>
+                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<LogIn />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+        </div>
     </div>
   );
 }
