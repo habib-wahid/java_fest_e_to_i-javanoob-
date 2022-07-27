@@ -21,6 +21,14 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
+    @GetMapping("/getUser")
+    public ResponseEntity<User> getUser(){
+
+        String userName = "habib_wahid";
+        System.out.println("userName " + userName);
+        return ResponseEntity.ok().body(userService.getUser(userName));
+    }
+
     @PostMapping("/user/save")
     public ResponseEntity<User> saveUser(@RequestBody User user){
 
