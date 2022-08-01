@@ -6,6 +6,8 @@ import {Link, NavLink, Route,Routes} from 'react-router-dom';
 import {Button} from "react-bootstrap";
 import AuthUser from "./AuthUser";
 import Dashboard from "./Dashboard";
+import Account from "../account/Account";
+import Posts from "../posts/compnaypost";
 
 function Menu() {
 
@@ -43,6 +45,8 @@ function Menu() {
       <container>
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/posts" element={<Posts />} />
         </Routes>
       </container>
     </>

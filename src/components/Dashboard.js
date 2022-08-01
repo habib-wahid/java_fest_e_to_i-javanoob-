@@ -1,5 +1,8 @@
 import AuthUser from "./AuthUser";
+import {Dropdown, Button, ButtonGroup, Row, Col, Stack} from "react-bootstrap";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import '../account/account.css';
 
 export default function Dashboard(){
 
@@ -9,13 +12,12 @@ export default function Dashboard(){
 
     useEffect(()=>{
         fetchUserDetails();
+        console.log("User name ",user.userName);
     },[])
 
-    const userName = {
-        userName: "habib_wahid"
-    }
+
     const fetchUserDetails = ()=>{
-        http.get('/api/getUser').then((res)=>{
+        http.get('/api/getUser', {params:{username : user.userName}}).then((res)=>{
             console.log(res.data);
             setData(res.data)
         })
@@ -23,30 +25,58 @@ export default function Dashboard(){
 
     return(
         <div className="container">
-            user dashboard
+
+            <Stack style={{
+                marginTop:"10px",
+                float:"right",
+            }} direction="horizontal" gap={3}>
+                <div>
+                    <Dropdown as={ButtonGroup}>
+                        <Button variant="success">Setting</Button>
+
+                        <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item>
+                                <Link className="link-style" to="/account">
+                                    Account
+                                </Link>
+                            </Dropdown.Item>
+
+                            <Dropdown.Item>
+                                <Link className="link-style" to="/posts">
+                                    Posts
+                                </Link>
+                            </Dropdown.Item>
+
+                            <Dropdown.Item>
+                                <Link className="link-style" to="#">
+                                    Sign-Out
+                                </Link>
+                            </Dropdown.Item>
 
 
-            {
-                data?
-                    <div>
-                        <h3>{data.name}</h3>
-                        <h3>{data.id}</h3>
-                    </div>:null
-            }
-            {/*<div>*/}
-            {/*    <h1>Name</h1>*/}
-            {/*    {*/}
-            {/*        user.name*/}
-            {/*    }*/}
-            {/*    <h1>Id</h1>*/}
-            {/*    {*/}
-            {/*        user.id*/}
-            {/*    }*/}
-            {/*    <h1>Username</h1>*/}
-            {/*    {*/}
-            {/*        user.userName*/}
-            {/*    }*/}
-            {/*</div>*/}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
+            </Stack>
+
+            <div style={{
+                marginTop:"10px",
+            }}>
+                user dashboard
+
+                {
+                    data?
+                        <div>
+                            <h3>{data.name}</h3>
+                            <h3>{data.id}</h3>
+                        </div>:null
+                }
+
+
+            </div>
+
         </div>
     )
 
