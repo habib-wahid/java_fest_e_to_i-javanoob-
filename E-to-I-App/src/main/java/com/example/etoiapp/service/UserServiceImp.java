@@ -26,10 +26,11 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(User user,Role role) {
 
         log.info("Saving new user {} to the database",user.getName());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.getRoles().add(role);
         return userRepo.save(user);
     }
 

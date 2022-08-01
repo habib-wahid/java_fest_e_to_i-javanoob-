@@ -21,18 +21,27 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    @GetMapping("/getUser")
-    public ResponseEntity<User> getUser(){
 
-        String userName = "habib_wahid";
-        System.out.println("userName " + userName);
-        return ResponseEntity.ok().body(userService.getUser(userName));
+    @GetMapping("/getUser")
+    public ResponseEntity<User> getUser(@RequestParam("username") String username){
+        return ResponseEntity.ok().body(userService.getUser(username));
+    }
+
+
+    @GetMapping("/getUser1")
+    public void getUser1(@RequestParam("username") String username){
+        System.out.println("userName " + username);
+
     }
 
     @PostMapping("/user/save")
-    public ResponseEntity<User> saveUser(@RequestBody User user){
+    public ResponseEntity<User> saveUser(@RequestBody RegisterUser user){
 
-        return ResponseEntity.ok().body(userService.saveUser(user));
+        Role role = new Role(null,user.getRole());
+        userService.saveRole(role);
+        System.out.println("RoleName "+ user.getRole());
+
+        return ResponseEntity.ok().body(userService.saveUser(user.getUser(),role));
     }
 
     @PostMapping("/role/save")
@@ -54,4 +63,15 @@ public class UserController {
 class RoleToUserForm{
     private String userName;
     private String roleName;
+}
+
+@Data
+class RegisterUser{
+    private User user;
+    private String role;
+}
+
+@Data
+class UserName{
+    private String username;
 }

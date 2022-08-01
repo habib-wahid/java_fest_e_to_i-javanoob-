@@ -33,14 +33,14 @@ public class EToIAppApplication implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
 
-        userService.saveRole(new Role(null,"ROLE_USER"));
-        userService.saveRole(new Role(null,"ROLE_MANAGER"));
-
-        userService.saveUser(new User(null,"habib","habib_wahid","123",new ArrayList<>()));
-        userService.saveUser(new User(null,"jia","jia","1234",new ArrayList<>()));
-
-        userService.addRoleToUser("habib_wahid","ROLE_MANAGER");
-        userService.addRoleToUser("jia","ROLE_USER");
+//        userService.saveRole(new Role(null,"ROLE_USER"));
+//        userService.saveRole(new Role(null,"ROLE_MANAGER"));
+//
+//        userService.saveUser(new User(null,"habib","habib_wahid","123",new ArrayList<>()));
+//        userService.saveUser(new User(null,"jia","jia","1234",new ArrayList<>()));
+//
+//        userService.addRoleToUser("habib_wahid","ROLE_MANAGER");
+//        userService.addRoleToUser("jia","ROLE_USER");
 
     }
 }
