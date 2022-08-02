@@ -49,6 +49,15 @@ export default function AuthUser(){
 
     });
 
+    const httpmultipart = axios.create({
+        baseURL:"http://localhost:8080",
+        headers:{
+            "Content-type":"multipart/form-data",
+            "Authorization" : `Bearer ${getToken()}`
+        }
+
+    });
+
     return {
         setToken:saveToken,
         getToken,
@@ -56,6 +65,7 @@ export default function AuthUser(){
         http,
         logout,
         saveUser,
-        getUser
+        getUser,
+        httpmultipart
     };
 }
