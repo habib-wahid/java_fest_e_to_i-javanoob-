@@ -23,5 +23,6 @@ public class UserDescription {
     private String logo;
     private String investment;
     private String requiredInvestment;
+    private String basePath;
 
 }

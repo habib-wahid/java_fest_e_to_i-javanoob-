@@ -20,5 +20,7 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserDescription userDescription;
 
 }
