@@ -1,14 +1,33 @@
 import {Card,Form,FormGroup,Button,Col} from "react-bootstrap";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import AuthUser from "../components/AuthUser";
 
 export default function Account(){
 
-    const {httpmultipart} = AuthUser();
+    const {getUser} = AuthUser();
+    const user = getUser();
+    const {http,httpmultipart} = AuthUser();
     const [data,setData] = useState({
     });
     const [image,setImage] = useState("");
     const [companyType,setCompanyType] = useState("Tech");
+    const [checkDataIsPresent,setCheckDataIsPresent] = useState(false);
+
+    useEffect(()=>{
+        fetchUserDetails();
+    },[])
+
+
+    const fetchUserDetails = ()=>{
+        http.get('/api/getUser', {params:{username : user.userName}}).then((res)=>{
+            console.log(res.data);
+            setCheckDataIsPresent(true);
+            setData({
+                ...data,
+                ['company'] : res.data.userName
+            })
+        })
+    }
 
     const handleChange=(e)=>{
 
@@ -48,10 +67,6 @@ export default function Account(){
                 <Card.Body>
                     <Card.Title>Fill Up Company Profile</Card.Title>
                     <Form>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Company Name </Form.Label>
-                            <Form.Control type="text" name="company" onChange={handleChange} placeholder="Enter email" />
-                        </Form.Group>
 
                         <Form.Group className="mb-3">
                             <Form.Label>Company Type</Form.Label>
