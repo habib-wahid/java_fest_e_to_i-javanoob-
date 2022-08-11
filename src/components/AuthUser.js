@@ -9,14 +9,30 @@ export default function AuthUser(){
 
     const getToken = ()=>{
         const tokenString = localStorage.getItem('token');
-        const userToken= JSON.parse(tokenString);
-        return userToken;
+
+        if(tokenString === 'undefined'){
+            console.log("token undefined")
+            return false;
+        }
+
+
+        console.log("here wer are")
+        if(tokenString !== undefined && tokenString !== null && tokenString !== '') {
+
+            console.log("here we go ",tokenString)
+            const userToken = JSON.parse(tokenString);
+            return userToken;
+        }
+        return null;
     }
 
     const getUser=()=>{
         const userString = localStorage.getItem('user');
-        const user = JSON.parse(userString);
-        return user;
+        if(typeof userString !== "undefined" && userString !== null && userString !== '') {
+            const user = JSON.parse(userString);
+            return user;
+        }
+        return null;
     }
 
     const saveUser = (user)=>{
@@ -25,6 +41,7 @@ export default function AuthUser(){
 
     const saveToken = (token)=>{
 
+        console.log("Token  ",token)
         localStorage.setItem("token",JSON.stringify(token));
        // localStorage.setItem("user", JSON.stringify(user));
 

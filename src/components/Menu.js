@@ -7,7 +7,9 @@ import {Button} from "react-bootstrap";
 import AuthUser from "./AuthUser";
 import Dashboard from "./Dashboard";
 import Account from "../account/Account";
-import Posts from "../posts/compnaypost";
+import CreatePosts from "../posts/CreatePost";
+import UserPosts from "../posts/UserPosts";
+import CompanyProfile from "../profile/CompanyProfile";
 
 function Menu() {
 
@@ -46,7 +48,9 @@ function Menu() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/posts" element={<Posts />} />
+          <Route path="/create-posts" element={<CreatePosts />} />
+          <Route path="/user-posts" element={<UserPosts />} />
+          <Route path="/company-profile/:name" element={<CompanyProfile />} />
         </Routes>
       </container>
     </>

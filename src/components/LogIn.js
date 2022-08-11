@@ -24,6 +24,10 @@ export default function LogIn(){
 
         http.post("/login",data).then((res)=>{
             console.log(res.data);
+
+            console.log("Access token ",res.data.access_token);
+            console.log("Username ", res.data.username);
+
             setToken(res.data.access_token);
             saveUser(res.data.username);
         })

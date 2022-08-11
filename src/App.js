@@ -12,8 +12,11 @@ function App() {
 
   return (
     <div>
-        {
-            !getToken()?
+
+zxxzx
+
+        {  !getToken() || getToken() === null?
+
             <Guest /> :
             <Menu />
         }

@@ -1,6 +1,7 @@
 import {Card,Form,FormGroup,Button,Col} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import AuthUser from "../components/AuthUser";
+import SideMenu from "../common/SideMenu";
 
 export default function Account(){
 
@@ -60,52 +61,61 @@ export default function Account(){
 
 
     return(
-        <div>
+        <div className="container">
 
-            <Col sm={6}>
-            <Card>
-                <Card.Body>
-                    <Card.Title>Fill Up Company Profile</Card.Title>
-                    <Form>
+            <div>
+                <SideMenu />
+            </div>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Company Type</Form.Label>
-                            <Form.Select name="companyType" value={companyType} onChange={handleChange}>
-                                <option>Tech</option>
-                                <option>Marketing</option>
-                            </Form.Select>
-                        </Form.Group>
+            <div>
+                <Col sm={6}>
+                    <Card style={{
+                        marginTop:"50px"
+                    }}>
+                        <Card.Body>
+                            <Card.Title>Fill Up Company Profile</Card.Title>
+                            <Form>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Company Description</Form.Label>
-                            <br />
-                            <textarea style={{
-                                width:"100%"
-                            }} name="description" onChange={handleChange} />
-                        </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Company Type</Form.Label>
+                                    <Form.Select name="companyType" value={companyType} onChange={handleChange}>
+                                        <option>Tech</option>
+                                        <option>Marketing</option>
+                                    </Form.Select>
+                                </Form.Group>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Company Logo </Form.Label>
-                            <input type="file" name="logo" onChange={handleChange} />
-                        </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Company Description</Form.Label>
+                                    <br />
+                                    <textarea style={{
+                                        width:"100%"
+                                    }} name="description" onChange={handleChange} />
+                                </Form.Group>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Investment Found </Form.Label>
-                            <Form.Control type="text" name="investment" onChange={handleChange}  />
-                        </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Company Logo </Form.Label>
+                                    <input type="file" name="logo" onChange={handleChange} />
+                                </Form.Group>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Investment Needed </Form.Label>
-                            <Form.Control type="text" name="investmentNeeded" onChange={handleChange}  />
-                        </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Investment Found </Form.Label>
+                                    <Form.Control type="text" name="investment" onChange={handleChange}  />
+                                </Form.Group>
 
-                        <Button variant="primary" onClick={onSubmit}>
-                            Submit
-                        </Button>
-                    </Form>
-                </Card.Body>
-            </Card>
-            </Col>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Investment Needed </Form.Label>
+                                    <Form.Control type="text" name="investmentNeeded" onChange={handleChange}  />
+                                </Form.Group>
+
+                                <Button variant="primary" onClick={onSubmit}>
+                                    Submit
+                                </Button>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </div>
+
         </div>
     )
 }
