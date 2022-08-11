@@ -1,29 +1,17 @@
 package com.example.etoiapp.controller;
-
 import com.example.etoiapp.entity.User;
 import com.example.etoiapp.entity.UserDescription;
 import com.example.etoiapp.repo.UserRepo;
 import com.example.etoiapp.service.FileUploadUtil;
 import com.example.etoiapp.service.UserDescriptionService;
-import com.example.etoiapp.service.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.convert.ReadingConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.transaction.Transactional;
 import java.io.IOException;
 
