@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react";
 import SideMenu from "../common/SideMenu";
 import {Button, Card, Col, Form} from "react-bootstrap";
 import AuthUser from "../components/AuthUser";
+import {useNavigate} from "react-router-dom";
 
 
 export default function CreatePosts(){
 
+    const navigate = useNavigate();
     const {getUser} = AuthUser();
     const user = getUser();
     const {http,httpmultipart} = AuthUser();
@@ -41,6 +43,7 @@ export default function CreatePosts(){
         httpmultipart.post('post/create-post',formData).then(
             (res)=>{
                 console.log("result ",res);
+                navigate('/user-posts')
             }
         )
 

@@ -5,11 +5,12 @@ import {Link} from "react-router-dom";
 
 function Home() {
 
-    const {http} = AuthUser();
+    const {publicHttp} = AuthUser();
     const [post,setPosts] = useState([]);
+    const basePath = "http://localhost:8080";
 
     useEffect(()=>{
-        http.get('/post/all-posts', ).then((res)=>{
+        publicHttp.get('/post/all-posts', ).then((res)=>{
             const [data] = res.data;
             console.log("Data ",res.data)
             //
@@ -41,8 +42,8 @@ function Home() {
                         width:"50%"
                     }}>
 
-                        <h4> <Link to={`/company-profile/${item.companyName}`}>{item.companyName} </Link>is looking for investment</h4>
-                        <Card.Img variant="top" src="holder.js/100px160" />
+                        <h4><img className="home-page-banners" src={ basePath + "/" + `${item.rootPath}` + "/" + `${item.bannerPath}`} /> <Link to={`/company-profile/${item.companyName}`}>{item.companyName} </Link>is looking for investment</h4>
+                        <Card.Img variant="top" src={ basePath + "/" + `${item.rootPath}` + "/" + `${item.bannerPath}`} />
                         <Card.Body>
                             <Card.Title>{item.projectName}</Card.Title>
                             <Card.Text>

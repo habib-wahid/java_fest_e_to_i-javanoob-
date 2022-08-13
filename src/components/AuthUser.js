@@ -66,6 +66,14 @@ export default function AuthUser(){
 
     });
 
+    const publicHttp = axios.create({
+        baseURL:"http://localhost:8080",
+        headers:{
+            "Content-type":"application/json",
+        }
+
+    });
+
     const httpmultipart = axios.create({
         baseURL:"http://localhost:8080",
         headers:{
@@ -83,6 +91,7 @@ export default function AuthUser(){
         logout,
         saveUser,
         getUser,
-        httpmultipart
+        httpmultipart,
+        publicHttp
     };
 }

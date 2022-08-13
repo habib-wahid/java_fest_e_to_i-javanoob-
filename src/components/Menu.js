@@ -10,6 +10,7 @@ import Account from "../account/Account";
 import CreatePosts from "../posts/CreatePost";
 import UserPosts from "../posts/UserPosts";
 import CompanyProfile from "../profile/CompanyProfile";
+import InvestorAccount from "../account/InvestorAccount";
 
 function Menu() {
 
@@ -50,6 +51,7 @@ function Menu() {
           <Route path="/account" element={<Account />} />
           <Route path="/create-posts" element={<CreatePosts />} />
           <Route path="/user-posts" element={<UserPosts />} />
+          <Route path="/user-account" element={<InvestorAccount />} />
           <Route path="/company-profile/:name" element={<CompanyProfile />} />
         </Routes>
       </container>
