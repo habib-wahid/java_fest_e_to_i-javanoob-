@@ -13,7 +13,7 @@ public interface PostRepo extends JpaRepository<Post,Long> {
 
 
     @Query(
-            value = "select project_name as projectName, description as description, type as type, investment_found as investmentfound,investment_needed as investmentneeded \n " +
+            value = "select id as id,project_name as projectName, description as description, type as type, investment_found as investmentfound,investment_needed as investmentneeded,banner_path as bannerPath,root_path as rootPath \n "+
                     "from post where post.name= :username", nativeQuery = true
     )
     List<PostDTO> findUserPost(@Param("username") String username);
@@ -21,8 +21,9 @@ public interface PostRepo extends JpaRepository<Post,Long> {
 
     @Query(
             value = "select project_name as projectName, description as description, name as companyName," +
-                    " type as type, investment_found as investmentfound,investment_needed as investmentneeded \n " +
-                    "from post",nativeQuery = true
+                    " type as type, investment_found as investmentfound,investment_needed as investmentneeded, " +
+                    "banner_path as bannerPath,root_path as rootPath \n"+
+                    "from post ",nativeQuery = true
 
     )
     List<PostDTO> findAllPost();

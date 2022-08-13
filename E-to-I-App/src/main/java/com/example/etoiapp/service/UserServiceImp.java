@@ -1,6 +1,7 @@
 package com.example.etoiapp.service;
 import com.example.etoiapp.entity.Role;
 import com.example.etoiapp.entity.User;
+import com.example.etoiapp.projections.UserDescriptionDTO;
 import com.example.etoiapp.repo.RoleRepo;
 import com.example.etoiapp.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -54,9 +55,14 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
     public User getUser(String userName) {
+        return userRepo.findByUserName(userName);
+    }
+
+    @Override
+    public UserDescriptionDTO getUserDescription(String userName) {
 
         log.info("Fetching user {} to the database",userName);
-        return userRepo.findByUserName(userName);
+        return userRepo.findUserByName(userName);
     }
 
     @Override

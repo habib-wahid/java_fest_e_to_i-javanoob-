@@ -27,8 +27,11 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private UserDescription userDescription;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Post> userPosts = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Investor investor;
 
 }

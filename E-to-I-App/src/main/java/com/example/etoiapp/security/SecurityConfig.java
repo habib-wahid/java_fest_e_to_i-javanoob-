@@ -39,13 +39,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().configurationSource(request-> {
             CorsConfiguration configuration = new CorsConfiguration();
             configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-            configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+            configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
             configuration.setAllowedHeaders(List.of("*"));
             return configuration;
         });
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/user-photos/**").permitAll();
+        http.authorizeRequests().antMatchers("/posts/**").permitAll();
         http.authorizeRequests().antMatchers("/api/users").permitAll();
         http.authorizeRequests().antMatchers("/api/user/save").permitAll();
         http.authorizeRequests().antMatchers("/post/all-posts").permitAll();

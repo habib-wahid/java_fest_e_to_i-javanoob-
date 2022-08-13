@@ -1,6 +1,7 @@
 package com.example.etoiapp.controller;
 import com.example.etoiapp.entity.Role;
 import com.example.etoiapp.entity.User;
+import com.example.etoiapp.projections.UserDescriptionDTO;
 import com.example.etoiapp.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

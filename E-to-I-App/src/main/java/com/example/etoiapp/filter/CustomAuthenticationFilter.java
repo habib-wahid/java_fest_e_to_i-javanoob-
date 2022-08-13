@@ -85,6 +85,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
       //  userRepo.findByUserName(user.getUsername());
         System.out.println("Find User " + user);
         tokens.put("username",userRepo.findByUserName(user.getUsername()));
+        //tokens.put("username",userRepo.findUserByName(user.getUsername()));
 
         response.setContentType(APPLICATION_JSON_VALUE);
 

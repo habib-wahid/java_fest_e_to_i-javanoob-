@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -15,14 +16,14 @@ public class UserDescription {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String type;
-    @Lob
+    private String company;
+    private String companyType;
     private String description;
-    @Lob
-    private String logo;
-    private String investment;
-    private String requiredInvestment;
+    private String website;
+    private String linkedIn;
     private String basePath;
+    private String originalPath;
+    private String technology;
+
 
 }

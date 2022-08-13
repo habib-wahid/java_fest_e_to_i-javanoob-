@@ -35,6 +35,8 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                 request.getServletPath().equals("/api/user/save") ||
                 request.getServletPath().equals("/posts/all-posts")
         ){
+
+            System.out.println("Here no api checking");
             filterChain.doFilter(request,response);
         }
         else{

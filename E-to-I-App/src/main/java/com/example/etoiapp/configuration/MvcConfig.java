@@ -15,8 +15,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/user-photos/**","/user-photos/**", "public/**")
-                .addResourceLocations("/user-photos/", "file:public/", "file:user-photos/");
+        registry.addResourceHandler("/user-photos/**","/user-photos/**","/posts/**", "public/**")
+                .addResourceLocations("/user-photos/","/posts/**", "file:public/", "file:user-photos/","file:posts/");
     }
 
 
