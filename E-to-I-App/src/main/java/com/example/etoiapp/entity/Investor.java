@@ -18,6 +18,7 @@ public class Investor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
     private String number;
     private String projectType;
     private String investment;

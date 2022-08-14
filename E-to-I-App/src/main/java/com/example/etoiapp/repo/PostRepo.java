@@ -20,7 +20,7 @@ public interface PostRepo extends JpaRepository<Post,Long> {
 
 
     @Query(
-            value = "select project_name as projectName, description as description, name as companyName," +
+            value = "select id as id,project_name as projectName, description as description, name as companyName," +
                     " type as type, investment_found as investmentfound,investment_needed as investmentneeded, " +
                     "banner_path as bannerPath,root_path as rootPath \n"+
                     "from post ",nativeQuery = true

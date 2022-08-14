@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.List;
 
 @Transactional
 @RestController
@@ -85,6 +86,7 @@ public class UserDescriptionController {
         User user = userRepo.findByUserName(body.getUsername());
 
         Investor investor = new Investor();
+        investor.setNumber(body.getUsername());
         investor.setNumber(body.getNumber());
         investor.setProjectType(body.getProjectType());
         investor.setAddress(body.getAddress());
@@ -93,6 +95,20 @@ public class UserDescriptionController {
 
         System.out.println("User" + user);
         return new ResponseEntity<>("Save investor ",HttpStatus.OK);
+    }
+
+    @GetMapping("/get-investor")
+    public ResponseEntity<User> getInvestor(@RequestParam("username") String username){
+        User user = userRepo.findByUserName(username);
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+    @GetMapping("all-investor")
+    public ResponseEntity<List<Investor>> getAllInvestor(){
+
+        List<Investor> investors = investorRepo.findAll();
+        return new ResponseEntity<>(investors,HttpStatus.OK);
+
     }
 }
 

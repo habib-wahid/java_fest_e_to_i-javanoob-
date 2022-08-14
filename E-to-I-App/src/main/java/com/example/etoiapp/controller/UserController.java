@@ -5,6 +5,7 @@ import com.example.etoiapp.projections.UserDescriptionDTO;
 import com.example.etoiapp.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -28,6 +29,10 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUser(username));
     }
 
+    @GetMapping("/getCompany")
+    public ResponseEntity<User> getCompany(@RequestParam("username") String username){
+        return new ResponseEntity<>(userService.getUser(username), HttpStatus.OK);
+    }
 
     @GetMapping("/getUser1")
     public void getUser1(@RequestParam("username") String username){
