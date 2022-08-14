@@ -11,6 +11,7 @@ import CreatePosts from "../posts/CreatePost";
 import UserPosts from "../posts/UserPosts";
 import CompanyProfile from "../profile/CompanyProfile";
 import InvestorAccount from "../account/InvestorAccount";
+import AllInvestors from "../common/AllInvestors";
 
 function Menu() {
 
@@ -37,6 +38,17 @@ function Menu() {
             }}
                 to="/dashboard">Dashboard</Link>
           </Nav>
+
+          <Nav className="me-auto">
+            <Link style={{
+              textDecoration:"none",
+              padding:"5px",
+              fontSize:"22px",
+
+            }}
+                  to="/all-investor">Investors</Link>
+          </Nav>
+
           <Nav className="me-auto">
            <Button onClick={singOut}>
              singout
@@ -52,6 +64,7 @@ function Menu() {
           <Route path="/create-posts" element={<CreatePosts />} />
           <Route path="/user-posts" element={<UserPosts />} />
           <Route path="/user-account" element={<InvestorAccount />} />
+          <Route path="/all-investor" element={<AllInvestors />} />
           <Route path="/company-profile/:name" element={<CompanyProfile />} />
         </Routes>
       </container>

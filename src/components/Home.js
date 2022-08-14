@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import AuthUser from "./AuthUser";
-import {Card, Form} from "react-bootstrap";
+import {Button, Card, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 function Home() {
 
-    const {publicHttp} = AuthUser();
+    const {publicHttp,getUser} = AuthUser();
     const [post,setPosts] = useState([]);
     const basePath = "http://localhost:8080";
+    const user = getUser();
 
     useEffect(()=>{
+
+        console.log("user ",user)
         publicHttp.get('/post/all-posts', ).then((res)=>{
             const [data] = res.data;
             console.log("Data ",res.data)
@@ -28,9 +31,12 @@ function Home() {
         })
     },[])
 
+    const handleClick=(item)=>{
+        console.log("Item ",item)
+    }
+
   return (
     <div className="container">
-
 
 
         {
@@ -66,6 +72,16 @@ function Home() {
                                 </Form.Group>
 
                             </Form>
+
+
+                            {
+                                user === null?
+                                    null:
+                                   <Button onClick={()=>handleClick(item)}
+                                   style={{
+                                   float:"right"
+                                   }} variant="success">invest</Button>
+                            }
 
                         </Card.Body>
                         <Card.Footer>

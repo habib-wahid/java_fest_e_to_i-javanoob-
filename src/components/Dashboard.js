@@ -54,6 +54,7 @@ export default function Dashboard(){
                             marginTop:"10px",
                         }}>
                             <h3>Compnay Profile</h3>
+                            <h4>{user.name}</h4>
 
                             {
                                 description !== null?
