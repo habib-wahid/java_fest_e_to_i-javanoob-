@@ -1,5 +1,6 @@
 package com.example.etoiapp.controller;
 
+import com.example.etoiapp.entity.InvestmentDetails;
 import com.example.etoiapp.entity.Post;
 import com.example.etoiapp.entity.User;
 import com.example.etoiapp.projections.PostDTO;
@@ -19,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +56,7 @@ public class PostController {
 
 
         Post post = new Post();
+        post.setDate(new Date());
         post.setName(postDescription.getUserName());
         post.setProjectName(postDescription.getProjectName());
         post.setDescription(postDescription.getProjectDescription());
@@ -95,6 +99,44 @@ public class PostController {
         return new ResponseEntity<>(postRepo.save(post),HttpStatus.OK);
     }
 
+    @Transactional
+    @PostMapping("/make-investment")
+    public ResponseEntity<String> postInvestment(@RequestBody InvestmentBody body){
+        System.out.println("Body " + body.getId());
+
+        Optional<Post> post = postRepo.findById(body.getId());
+        Post post1 = post.get();
+        InvestmentDetails investmentDetails = new InvestmentDetails();
+        investmentDetails.setUsername(body.getName());
+        investmentDetails.setAmount(Long.valueOf(body.getInvestment()));
+        post1.setInvestmentDetailsList(Arrays.asList(investmentDetails));
+
+        return new ResponseEntity<>("Data saved",HttpStatus.OK);
+    }
+
+    @GetMapping("/get-investment-details")
+    public ResponseEntity<List<InvestmentDetails>> getInvestmentDetails(@RequestParam("id") Long id){
+
+        Optional<Post> post = postRepo.findById(id);
+        Post a = post.get();
+        return new ResponseEntity<>(a.getInvestmentDetailsList(),HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete-post/{id}")
+    public ResponseEntity<String> deletePost(@PathVariable Long id){
+
+        System.out.println("ID " + id);
+        postRepo.deleteById(id);
+        return new ResponseEntity<>("Post deleted",HttpStatus.OK);
+    }
+}
+
+
+@Data
+class InvestmentBody{
+    private Long id;
+    private String name;
+    private String investment;
 }
 
 @Data

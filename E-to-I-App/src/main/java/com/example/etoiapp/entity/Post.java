@@ -1,12 +1,14 @@
 package com.example.etoiapp.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,5 +28,10 @@ public class Post {
     private Long investmentNeeded;
     private String bannerPath;
     private String rootPath;
+    private Date date;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    List<InvestmentDetails> investmentDetailsList;
 
 }

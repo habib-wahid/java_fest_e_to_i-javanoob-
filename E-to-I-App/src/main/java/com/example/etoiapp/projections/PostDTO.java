@@ -1,5 +1,6 @@
 package com.example.etoiapp.projections;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public interface PostDTO {
 
@@ -12,5 +13,5 @@ public interface PostDTO {
     Long getInvestmentneeded();
     String getRootPath();
     String getBannerPath();
-    LocalDateTime getDateTime();
+    Date getDate();
 }

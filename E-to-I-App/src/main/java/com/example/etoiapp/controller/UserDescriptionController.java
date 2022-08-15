@@ -34,23 +34,20 @@ public class UserDescriptionController {
     private InvestorRepo investorRepo;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadDescription(@RequestParam("logo") MultipartFile multipartFile, @RequestParam("file") String file,@RequestParam("technology") String technology) throws IOException {
+    public ResponseEntity<String> uploadDescription(@RequestParam("logo") MultipartFile multipartFile, @RequestParam("file") String file) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         Description description = objectMapper.readValue(file,Description.class);
-        System.out.println(description.getWebsite());
 
 
+        System.out.println(description.getTechnology());
 
-        Tech tech = objectMapper.readValue(technology,Tech.class);
-
-        System.out.println("TEch " + tech.getMl());
 
         UserDescription userDescription = new UserDescription();
         userDescription.setDescription(description.getDescription());
         userDescription.setCompany(description.getCompany());
         userDescription.setCompanyType(description.getCompanyType());
-        userDescription.setTechnology(tech.getMl());
+        userDescription.setTechnology(description.getTechnology());
         userDescription.setLinkedIn(description.getLinkedIn());
         userDescription.setWebsite(description.getWebsite());
         userDescription.setBasePath("user-photos/" + description.getCompany());
@@ -86,7 +83,7 @@ public class UserDescriptionController {
         User user = userRepo.findByUserName(body.getUsername());
 
         Investor investor = new Investor();
-        investor.setNumber(body.getUsername());
+        investor.setName(body.getUsername());
         investor.setNumber(body.getNumber());
         investor.setProjectType(body.getProjectType());
         investor.setAddress(body.getAddress());
@@ -127,6 +124,7 @@ class InvestorBody {
 class Description {
     private String company;
     private String companyType;
+    private String technology;
     private String description;
     private String website;
     private String linkedIn;
