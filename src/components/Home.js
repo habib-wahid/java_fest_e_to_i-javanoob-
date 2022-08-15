@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import AuthUser from "./AuthUser";
 import {Button, Card, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import ModalComponent from "../common/Modal";
 
 function Home() {
 
@@ -9,6 +10,8 @@ function Home() {
     const [post,setPosts] = useState([]);
     const basePath = "http://localhost:8080";
     const user = getUser();
+    const [show,setShow] = useState(false);
+    const [selectedItem,setSelectedItem] = useState(null);
 
     useEffect(()=>{
 
@@ -33,15 +36,42 @@ function Home() {
 
     const handleClick=(item)=>{
         console.log("Item ",item)
+        setShow(true);
+        setSelectedItem(item);
+    }
+
+
+    const getTime=(date)=>{
+
+        if(date === null)
+            return "45 minutes ago";
+
+        const arr = date.split("T");
+        return arr[1].substr(0,8);
+    }
+
+    const getDate=(date)=>{
+
+        if(date === null)
+            return "2022-08-14";
+        const arr = date.split("T");
+        return arr[0];
     }
 
   return (
     <div className="container">
 
+        {
+            show?
+                <ModalComponent show={show} setShow={setShow} item={selectedItem} /> : null
+        }
+
 
         {
             post.map((item)=>
-                <div>
+                <div style={{
+                    marginTop:"10px"
+                }}>
 
                     <Card style={{
                         marginLeft:"20%",
@@ -85,7 +115,8 @@ function Home() {
 
                         </Card.Body>
                         <Card.Footer>
-                            <small className="text-muted">Last updated 3 mins ago</small>
+                            <small className="text-muted">Time {getTime(item.date)} </small>
+                            <small style={{ float:"right"}} className="text-muted">Date {getDate(item.date)} </small>
                         </Card.Footer>
                     </Card>
 

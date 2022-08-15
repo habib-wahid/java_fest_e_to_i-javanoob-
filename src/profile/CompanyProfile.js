@@ -15,20 +15,22 @@ export default function CompanyProfile(){
     const [checkDataIsPresent,setCheckDataIsPresent] = useState(false);
     const [posts,setPosts] = useState();
     const [postState,setPostState] = useState(false);
-    const basePath = "http://localhost:8080"
+    const basePath = "http://localhost:8080";
+    const [investmentDetails,setInvestmentDetails] = useState(null);
 
     useEffect(()=>{
         fetchUserDetails();
+        fetchUserAllPost();
         console.log("User name ",params.name);
     },[])
 
 
-    const fetchUserDetails = ()=>{
+    const fetchUserDetails = () =>{
         http.get('/api/getCompany', {params:{username : params.name}}).then((res)=>{
             console.log("Result " , res.data);
 
             setDescription(res.data.userDescription);
-            setPosts(res.data.userPosts);
+           // setPosts(res.data.userPosts);
 
             if(res.data.useDescription !== null){
                 setDescription(res.data.userDescription);
@@ -40,9 +42,43 @@ export default function CompanyProfile(){
         })
     }
 
+    const fetchUserAllPost=()=>{
+        http.get('/post/user-posts', {params:{username : params.name}}).then((res)=>{
+            console.log("All Post " , res.data);
+            setPosts(res.data);
+
+        })
+    }
+
     const showPosts=()=>{
         setPostState(!postState);
     }
+
+    const handleInvestment=(item)=>{
+        http.get('/post/get-investment-details',{params:{id:item.id}}).then((res)=>{
+            console.log("Details ",res.data)
+            setInvestmentDetails(res.data)
+        })
+    }
+
+
+    const getTime=(date)=>{
+
+        if(date === null)
+            return "45 minutes ago";
+
+        const arr = date.split("T");
+        return arr[1].substr(0,8);
+    }
+
+    const getDate=(date)=>{
+
+        if(date === null)
+            return "2022-08-14";
+        const arr = date.split("T");
+        return arr[0];
+    }
+
 
     return(
         <div className="container" style={{
@@ -62,11 +98,11 @@ export default function CompanyProfile(){
                                                 marginLeft:"20%",
                                                 width:"50%"
                                             }}>
-                                                <Card.Img variant="top" src={ basePath + "/" + `${item.rootPath}` + "/" + `${item.bannerPath}`} />
+                                                <Card.Img src={ basePath + "/" + `${item.rootPath}` + "/" + `${item.bannerPath}`} />
                                                 <Card.Body>
                                                     <Card.Title>{item.projectName}</Card.Title>
 
-                                                    <img className="post-image" src={ basePath + "/" + `${item.rootPath}` + "/" + `${item.bannerPath}`} />
+                                                    {/*<img className="post-image" src={ basePath + "/" + `${item.rootPath}` + "/" + `${item.bannerPath}`} />*/}
                                                     <Card.Text>
                                                         {item.description}
                                                     </Card.Text>
@@ -78,8 +114,13 @@ export default function CompanyProfile(){
                                                     </Card.Text>
                                                 </Card.Body>
                                                 <Card.Footer>
-                                                    <small className="text-muted">Post updated at </small>
+                                                    <small className="text-muted">Time {getTime(item.date)} </small>
+                                                    <small style={{ float:"right"}} className="text-muted">Time {getDate(item.date)} </small>
                                                 </Card.Footer>
+                                                <Card.Footer>
+                                                    <Button onClick={()=>handleInvestment(item)}>See Investment History </Button>
+                                                </Card.Footer>
+
 
                                             </Card>
 
@@ -99,6 +140,8 @@ export default function CompanyProfile(){
                                         </div>
                                     )
                                 }
+
+
                             </Col>
                             <Col>
                                 <button onClick={showPosts} style={{
@@ -107,6 +150,23 @@ export default function CompanyProfile(){
                                 }}>
                                     See DasBoard
                                 </button>
+
+                                <div>
+                                    {
+                                        investmentDetails !== null && investmentDetails.map((details)=>
+                                            <div style={{
+                                                marginTop:"20px"
+                                            }}>
+                                                <h4>Investment Details </h4> <br />
+                                                <b>Name : </b> {details.username} {" "}<br/>
+                                                <b>Amount : </b> {details.amount}
+                                                <br />
+                                            </div>
+
+                                        )
+
+                                    }
+                                </div>
                             </Col>
                         </Row>
 

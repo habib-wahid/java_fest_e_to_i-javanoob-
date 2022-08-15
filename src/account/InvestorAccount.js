@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import {Button, Card, Col, Form} from "react-bootstrap";
 import AuthUser from "../components/AuthUser";
+import {useNavigate} from "react-router-dom";
 
 
 export default function InvestorAccount(){
 
+    const navigate = useNavigate();
     const {getUser,http} = AuthUser();
     const user = getUser();
 
@@ -26,7 +28,7 @@ export default function InvestorAccount(){
         http.post('user/save-investor',data).then(
             (res)=>{
                 console.log("result ",res.data);
-
+                navigate('/dashboard')
             }
         )
     }

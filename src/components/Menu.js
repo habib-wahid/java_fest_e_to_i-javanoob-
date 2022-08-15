@@ -12,6 +12,7 @@ import UserPosts from "../posts/UserPosts";
 import CompanyProfile from "../profile/CompanyProfile";
 import InvestorAccount from "../account/InvestorAccount";
 import AllInvestors from "../common/AllInvestors";
+import About from "../account/About";
 
 function Menu() {
 
@@ -49,16 +50,30 @@ function Menu() {
                   to="/all-investor">Investors</Link>
           </Nav>
 
+
           <Nav className="me-auto">
            <Button onClick={singOut}>
              singout
            </Button>
           </Nav>
+
+          <Nav className="me-auto">
+            <Link style={{
+              textDecoration:"none",
+              padding:"5px",
+              fontSize:"22px",
+              float:"right"
+
+            }}
+                  to="/about">About</Link>
+          </Nav>
+
         </Container>
       </Navbar>
 
       <container>
         <Routes>
+          <Route path="/about" element={<About />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/account" element={<Account />} />
           <Route path="/create-posts" element={<CreatePosts />} />

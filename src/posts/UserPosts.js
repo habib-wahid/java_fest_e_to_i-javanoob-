@@ -57,6 +57,41 @@ export default function UserPosts(){
         setEditClick(true)
     }
 
+    const onDelete=(item)=>{
+        console.log("Item ",item)
+
+        http.delete(`/post/delete-post/${item.id}`).then((res)=>{
+
+            console.log("Data ",res.data)
+
+            // setUserPosts(res.data)
+            // // data.forEach((item)=>{
+            // //     setUserPosts(prevState => [...prevState,item])
+            // //     }
+            // // )
+            //
+            // setCheck(true);
+
+        })
+    }
+
+    const getTime=(date)=>{
+
+        if(date === null)
+            return "45 minutes ago";
+
+        const arr = date.split("T");
+        return arr[1].substr(0,8);
+    }
+
+    const getDate=(date)=>{
+
+        if(date === null)
+            return "2022-08-14";
+        const arr = date.split("T");
+        return arr[0];
+    }
+
     return(
         <div>
             {
@@ -66,10 +101,13 @@ export default function UserPosts(){
                         <div className="container">
 
                             <SideMenu />
-                            User Posts
+
                             {
                                 userPosts.map((item)=>
-                                    <div key={item.id}>
+                                    <div style={{
+                                        marginTop:"10px"
+                                    }}
+                                        key={item.id}>
                                         <Card style={{
                                             marginLeft:"20%",
                                             width:"50%"
@@ -90,7 +128,8 @@ export default function UserPosts(){
                                                 </Card.Text>
                                             </Card.Body>
                                             <Card.Footer>
-                                                <small className="text-muted">Post updated at </small>
+                                                <small className="text-muted">Time {getTime(item.date)} </small>
+                                                <small style={{ float:"right"}} className="text-muted">Date {getDate(item.date)} </small>
                                             </Card.Footer>
 
                                         </Card>
@@ -101,7 +140,7 @@ export default function UserPosts(){
                                             marginLeft:"20%",
                                             width:"50%"
                                         }}>
-                                            <Button variant="success" onClick={()=>{onEditClick(item)}} >Edit</Button> {" "} <Button variant="danger">Delete</Button>
+                                            <Button variant="success" onClick={()=>{onEditClick(item)}} >Edit</Button> {" "} <Button onClick={()=>{onDelete(item)}} variant="danger">Delete</Button>
                                         </div>
 
 
@@ -113,11 +152,6 @@ export default function UserPosts(){
                                 )
                             }
 
-                            {
-                                check ?
-                                    <div>hello</div>:
-                                    null
-                            }
 
                         </div>
                     </div>

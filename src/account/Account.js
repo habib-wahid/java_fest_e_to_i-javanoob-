@@ -15,6 +15,7 @@ export default function Account(){
     });
     const [image,setImage] = useState("");
     const [companyType,setCompanyType] = useState("Tech");
+    const [technology,setTechnology] = useState("Machine Learning");
     const [checkDataIsPresent,setCheckDataIsPresent] = useState(false);
     const [mlChecked,setMlChecked] = useState(false);
     const [security,setSecurity] = useState(false);
@@ -43,6 +44,10 @@ export default function Account(){
 
         if(e.target.name === "companyType"){
             setCompanyType(e.target.value);
+        }
+
+        if(e.target.name === "technology"){
+            setTechnology(e.target.value)
         }
 
         if(e.target.name === "logo"){
@@ -164,64 +169,76 @@ export default function Account(){
                                 </Form.Group>
 
                                 <Form.Group className="mb-3">
+                                    <Form.Label><b>Technology</b></Form.Label>
+                                    <Form.Select name="technology" value={technology} onChange={handleChange}>
+                                        <option>Machine Learning</option>
+                                        <option>Block Chain</option>
+                                        <option>Security</option>
+                                        <option>Web Development</option>
+                                        <option>Android</option>
 
-                                    <Form.Label><b>Select Technologies </b></Form.Label>
-
-                                    <div className="topping">
-                                        <input
-                                            type="checkbox"
-                                            name="ml"
-                                            value="ml"
-                                            checked={mlChecked}
-                                            onChange={handleTechnology}
-                                        />
-                                        Machine Learning
-                                    </div>
-                                    <div className="topping">
-                                        <input
-                                            type="checkbox"
-                                            name="blockchain"
-                                            value="ml"
-                                            checked={blockChain}
-                                            onChange={handleTechnology}
-                                        />
-                                        Block Chain
-                                    </div>
-                                    <div className="topping">
-                                        <input
-                                            type="checkbox"
-                                            name="security"
-                                            value="ml"
-                                            checked={security}
-                                            onChange={handleTechnology}
-                                        />
-                                        Security
-                                    </div>
-                                    <div className="topping">
-                                        <input
-                                            type="checkbox"
-                                            name="web"
-                                            value="ml"
-                                            checked={web}
-                                            onChange={handleTechnology}
-                                        />
-                                        Web Development
-                                    </div>
-                                    <div className="topping">
-                                        <input
-                                            type="checkbox"
-                                            name="android"
-                                            value="ml"
-                                            checked={android}
-                                            onChange={handleTechnology}
-                                        />
-                                        Android
-                                    </div>
-
+                                    </Form.Select>
                                 </Form.Group>
 
+                                {/*<Form.Group className="mb-3">*/}
+
+                                {/*    <Form.Label><b>Select Technologies </b></Form.Label>*/}
+
+                                {/*    <div className="topping">*/}
+                                {/*        <input*/}
+                                {/*            type="checkbox"*/}
+                                {/*            name="ml"*/}
+                                {/*            value="ml"*/}
+                                {/*            checked={mlChecked}*/}
+                                {/*            onChange={handleTechnology}*/}
+                                {/*        />*/}
+                                {/*        Machine Learning*/}
+                                {/*    </div>*/}
+                                {/*    <div className="topping">*/}
+                                {/*        <input*/}
+                                {/*            type="checkbox"*/}
+                                {/*            name="blockchain"*/}
+                                {/*            value="ml"*/}
+                                {/*            checked={blockChain}*/}
+                                {/*            onChange={handleTechnology}*/}
+                                {/*        />*/}
+                                {/*        Block Chain*/}
+                                {/*    </div>*/}
+                                {/*    <div className="topping">*/}
+                                {/*        <input*/}
+                                {/*            type="checkbox"*/}
+                                {/*            name="security"*/}
+                                {/*            value="ml"*/}
+                                {/*            checked={security}*/}
+                                {/*            onChange={handleTechnology}*/}
+                                {/*        />*/}
+                                {/*        Security*/}
+                                {/*    </div>*/}
+                                {/*    <div className="topping">*/}
+                                {/*        <input*/}
+                                {/*            type="checkbox"*/}
+                                {/*            name="web"*/}
+                                {/*            value="ml"*/}
+                                {/*            checked={web}*/}
+                                {/*            onChange={handleTechnology}*/}
+                                {/*        />*/}
+                                {/*        Web Development*/}
+                                {/*    </div>*/}
+                                {/*    <div className="topping">*/}
+                                {/*        <input*/}
+                                {/*            type="checkbox"*/}
+                                {/*            name="android"*/}
+                                {/*            value="ml"*/}
+                                {/*            checked={android}*/}
+                                {/*            onChange={handleTechnology}*/}
+                                {/*        />*/}
+                                {/*        Android*/}
+                                {/*    </div>*/}
+
+                                {/*</Form.Group>*/}
+
                                 <Form.Group className="mb-3">
-                                    <Form.Label> <b>Company Logo  </b></Form.Label>
+                                    <Form.Label> <b>Company Logo  </b></Form.Label>  <br />
                                     <input type="file" name="logo" onChange={handleChange} />
                                 </Form.Group>
 

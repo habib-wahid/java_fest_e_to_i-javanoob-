@@ -60,11 +60,11 @@ export default function Dashboard(){
                                 description !== null?
                                     <div>
 
-                                        <img className="profile-image" src={basepath + "/" + `${description.basePath}` + "/" + `${description.originalPath}`} />
+                                        {/*<img className="profile-image" src={basepath + "/" + `${description.basePath}` + "/" + `${description.originalPath}`} />*/}
 
                                         <div>
                                             <Card style={{ width: '30rem' }}>
-                                                <img className="profile-image" variant="top" src={basepath + "/" + `${description.basePath}` + "/" + `${description.originalPath}`} />
+                                                <Card.Img variant="top" src={basepath + "/" + `${description.basePath}` + "/" + `${description.originalPath}`} />
                                                 <Card.Body>
                                                     <Card.Title>{description.company}</Card.Title>
                                                     <Card.Text>
@@ -73,11 +73,16 @@ export default function Dashboard(){
                                                 </Card.Body>
 
                                                 <ListGroup className="list-group-flush">
-                                                    <ListGroup.Item><b>Technology </b> {description.companyType}</ListGroup.Item>
+                                                    <ListGroup.Item><b>Working Sector </b> {description.companyType}</ListGroup.Item>
                                                 </ListGroup>
+
+                                                <ListGroup className="list-group-flush">
+                                                    <ListGroup.Item><b>Working Technology</b> {description.technology}</ListGroup.Item>
+                                                </ListGroup>
+
                                                 <Card.Body>
-                                                    <Card.Link href={description.website}>Website</Card.Link>
-                                                    <Card.Link href="#">Linked In</Card.Link>
+                                                    <Card.Link href={"http://" + `${description.website}`}>Website</Card.Link>
+                                                    <Card.Link href={"http://" + `${description.linkedIn}`}>Linked In</Card.Link>
                                                 </Card.Body>
                                             </Card>
                                         </div>
